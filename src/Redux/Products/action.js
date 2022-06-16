@@ -24,7 +24,11 @@ export const fetchData = (payload) => {
   return (dispatch) => {
     dispatch(fetchDataReq());
     baseUrl
-      .get("/products")
+      .get("/products", {
+        params: {
+          ...payload,
+        },
+      })
       .then((res) => dispatch(fetchDataSucces(res.data)))
       .catch((err) => dispatch(fetchDataFaliure(err.data)));
   };

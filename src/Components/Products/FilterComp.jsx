@@ -6,11 +6,14 @@ import {
   Checkbox,
   CheckboxGroup,
 } from "@chakra-ui/react";
+import { useDispatch } from "react-redux"
 import { useSearchParams } from "react-router-dom";
-
+import { fetchData } from "../../Redux/Products/action"
 
 
 const FilterComp = () => {
+
+  const dispatch = useDispatch()
 
   const [searchParams, setsearchParams] = useSearchParams()
   const [catagoryValues, setCatagoryValues] = useState(searchParams.getAll("category") || [])
@@ -22,8 +25,12 @@ const FilterComp = () => {
   useEffect(() => {
     if (catagoryValues) {
       setsearchParams({ category: catagoryValues });
+      let params = {
+        category: searchParams.getAll("category")
+      }
+      dispatch(fetchData(params))
     }
-  }, [catagoryValues, setsearchParams])
+  }, [catagoryValues, setsearchParams, dispatch, searchParams])
 
   return <div><Box p={"1rem 2rem"}>
     <VStack

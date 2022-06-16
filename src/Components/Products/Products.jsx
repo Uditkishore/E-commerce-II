@@ -5,13 +5,18 @@ import FilterComp from "./FilterComp";
 import { Box, Spinner } from "@chakra-ui/react";
 import "./products.css"
 import ProductSimple from "./singleProduct";
+import { useSearchParams } from "react-router-dom";
 
 const ProductsPage = () => {
-  const { products, error, isLoading } = useSelector((store) => store.ecommerceData);
+  const { products, isLoading } = useSelector((store) => store.ecommerceData);
+  const [searchParams] = useSearchParams()
   const dispatch = useDispatch();
   useEffect(() => {
     if (products?.length === 0) {
-      dispatch(fetchData());
+      let params = {
+        category: searchParams.getAll("category")
+      }
+      dispatch(fetchData(params));
     }
   }, [dispatch, products?.length]);
 
