@@ -1,0 +1,11 @@
+.PriductList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 5px;
+}
+
+.PriductDiv {
+    padding: 10px;
+}
